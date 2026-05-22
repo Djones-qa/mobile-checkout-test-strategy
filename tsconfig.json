@@ -10,6 +10,7 @@
     "resolveJsonModule": true,
     "outDir": "./dist",
     "baseUrl": ".",
+    "types": ["jest", "@wdio/globals/types", "node"],
     "paths": {
       "@detox/*": ["detox/*"],
       "@appium/*": ["appium/*"],

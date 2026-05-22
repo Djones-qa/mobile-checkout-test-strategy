@@ -23,6 +23,7 @@
     "@percy/storybook": "10.0.0",
     "@storybook/react-native": "10.4.4",
     "@types/jest": "29.5.12",
+    "@types/node": "20.14.0",
     "@wdio/appium-service": "9.27.1",
     "@wdio/cli": "9.27.1",
     "@wdio/jasmine-framework": "9.27.1",
