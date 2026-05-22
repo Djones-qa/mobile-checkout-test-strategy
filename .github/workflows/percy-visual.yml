@@ -20,7 +20,7 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Build Storybook
         run: npm run storybook -- --ci --smoke-test
@@ -44,10 +44,10 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Install Detox CLI
-        run: npm install -g detox-cli@20.18.0
+        run: npm install -g detox-cli@20.50.4
 
       - name: Install CocoaPods
         run: cd ios && pod install --repo-update
