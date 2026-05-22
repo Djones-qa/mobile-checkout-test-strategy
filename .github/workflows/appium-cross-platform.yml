@@ -2,7 +2,7 @@ name: Appium — Cross-Platform
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   schedule:
     # Nightly at 02:00 UTC
     - cron: "0 2 * * *"

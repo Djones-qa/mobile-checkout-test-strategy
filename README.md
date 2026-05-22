@@ -1,9 +1,9 @@
 # Mobile Checkout Test Strategy
 
-[![Detox iOS](https://img.shields.io/github/actions/workflow/status/Djones-qa/mobile-checkout-test-strategy/detox-ios.yml?label=Detox%20iOS&logo=apple&logoColor=white)](https://github.com/Djones-qa/mobile-checkout-test-strategy/actions/workflows/detox-ios.yml)
-[![Detox Android](https://img.shields.io/github/actions/workflow/status/Djones-qa/mobile-checkout-test-strategy/detox-android.yml?label=Detox%20Android&logo=android&logoColor=white)](https://github.com/Djones-qa/mobile-checkout-test-strategy/actions/workflows/detox-android.yml)
-[![Appium Cross-Platform](https://img.shields.io/github/actions/workflow/status/Djones-qa/mobile-checkout-test-strategy/appium-cross-platform.yml?label=Appium&logo=appium&logoColor=white)](https://github.com/Djones-qa/mobile-checkout-test-strategy/actions/workflows/appium-cross-platform.yml)
-[![Percy Visual](https://img.shields.io/github/actions/workflow/status/Djones-qa/mobile-checkout-test-strategy/percy-visual.yml?label=Percy%20Visual&logo=percy&logoColor=white)](https://github.com/Djones-qa/mobile-checkout-test-strategy/actions/workflows/percy-visual.yml)
+[![Detox iOS](https://img.shields.io/github/actions/workflow/status/Djones-qa/mobile-checkout-test-strategy/detox-ios.yml?branch=master&label=Detox%20iOS&logo=apple&logoColor=white)](https://github.com/Djones-qa/mobile-checkout-test-strategy/actions/workflows/detox-ios.yml)
+[![Detox Android](https://img.shields.io/github/actions/workflow/status/Djones-qa/mobile-checkout-test-strategy/detox-android.yml?branch=master&label=Detox%20Android&logo=android&logoColor=white)](https://github.com/Djones-qa/mobile-checkout-test-strategy/actions/workflows/detox-android.yml)
+[![Appium Cross-Platform](https://img.shields.io/github/actions/workflow/status/Djones-qa/mobile-checkout-test-strategy/appium-cross-platform.yml?branch=master&label=Appium&logo=appium&logoColor=white)](https://github.com/Djones-qa/mobile-checkout-test-strategy/actions/workflows/appium-cross-platform.yml)
+[![Percy Visual](https://img.shields.io/badge/Percy-Visual%20Regression-9E66BF?logo=percy&logoColor=white)](https://github.com/Djones-qa/mobile-checkout-test-strategy/actions/workflows/percy-visual.yml)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React Native](https://img.shields.io/badge/React%20Native-0.73-61DAFB?logo=react&logoColor=white)](https://reactnative.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)

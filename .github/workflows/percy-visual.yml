@@ -1,8 +1,10 @@
 name: Percy — Visual Regression
 
 on:
+  push:
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
 
 jobs:
   percy-storybook:
