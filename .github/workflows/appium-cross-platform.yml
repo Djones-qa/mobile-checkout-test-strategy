@@ -1,0 +1,105 @@
+name: Appium — Cross-Platform
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Nightly at 02:00 UTC
+    - cron: "0 2 * * *"
+
+jobs:
+  appium-ios:
+    name: Appium — iOS
+    runs-on: macos-14
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Appium
+        run: |
+          npm install -g appium@2.5.1
+          appium driver install xcuitest
+
+      - name: Build iOS app
+        run: npm run detox:build:ios
+
+      - name: Start Appium server
+        run: appium --relaxed-security &
+        env:
+          APPIUM_HOME: ${{ runner.temp }}/appium
+
+      - name: Run Appium iOS tests
+        run: npx wdio run ./appium/wdio.conf.js --capabilities '[{"platformName":"iOS"}]'
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: appium-ios-reports
+          path: appium/reports/
+          retention-days: 7
+
+  appium-android:
+    name: Appium — Android
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Appium
+        run: |
+          npm install -g appium@2.5.1
+          appium driver install uiautomator2
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' \
+            | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Build Android app
+        run: npm run detox:build:android
+
+      - name: Run Appium Android tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          avd-name: Pixel_7_API_34
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
+          disable-animations: true
+          script: |
+            appium --relaxed-security &
+            sleep 5
+            npx wdio run ./appium/wdio.conf.js --capabilities '[{"platformName":"Android"}]'
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: appium-android-reports
+          path: appium/reports/
+          retention-days: 7

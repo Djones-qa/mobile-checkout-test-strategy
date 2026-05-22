@@ -1,0 +1,26 @@
+appId: com.mobilecheckout
+name: Biometric Login Flow
+tags:
+  - auth
+  - biometric
+  - smoke
+
+---
+# ─── Biometric Authentication Flow ───────────────────────────────────────────
+
+- launchApp:
+    clearState: true
+
+# Expect biometric prompt on launch (biometrics previously enabled)
+- assertVisible:
+    id: "biometric-prompt"
+
+# Simulate successful biometric match
+- runScript:
+    file: ../scripts/simulateBiometricSuccess.js
+
+# Verify home screen is shown
+- assertVisible:
+    id: "home-screen"
+- assertNotVisible:
+    id: "login-screen"

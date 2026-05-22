@@ -1,0 +1,72 @@
+name: Detox — iOS Simulator
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  detox-ios:
+    name: Detox E2E — iOS ${{ matrix.ios-version }}
+    runs-on: macos-14
+
+    strategy:
+      fail-fast: false
+      matrix:
+        ios-version: ["17.2", "16.4"]
+        device: ["iPhone 15 Pro", "iPhone SE (3rd generation)"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Detox CLI
+        run: npm install -g detox-cli@20.18.0
+
+      - name: Install CocoaPods
+        run: |
+          cd ios
+          pod install --repo-update
+
+      - name: Build iOS app for testing
+        run: npm run detox:build:ios
+
+      - name: Boot iOS Simulator
+        run: |
+          UDID=$(xcrun simctl create "TestDevice" \
+            "com.apple.CoreSimulator.SimDeviceType.${{ matrix.device }}" \
+            "com.apple.CoreSimulator.SimRuntime.iOS-${{ matrix.ios-version }}" \
+            | tr -d '[:space:]')
+          xcrun simctl boot "$UDID"
+          echo "SIMULATOR_UDID=$UDID" >> $GITHUB_ENV
+
+      - name: Enable Face ID on simulator
+        run: |
+          xcrun simctl --set testing biometricEnrollment Enrolled
+
+      - name: Run Detox tests
+        run: |
+          detox test \
+            --configuration ios.sim.debug \
+            --device-name "${{ matrix.device }}" \
+            --record-logs all \
+            --take-screenshots failing \
+            --artifacts-location ./artifacts
+
+      - name: Upload test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: detox-ios-artifacts-${{ matrix.ios-version }}-${{ matrix.device }}
+          path: ./artifacts
+          retention-days: 7

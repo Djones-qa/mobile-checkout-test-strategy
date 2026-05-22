@@ -1,0 +1,84 @@
+appId: com.mobilecheckout
+name: Guest Checkout Flow
+tags:
+  - checkout
+  - guest
+  - smoke
+
+---
+# ─── Guest Checkout: Happy Path ───────────────────────────────────────────────
+
+- launchApp
+
+# Add item to cart
+- tapOn:
+    id: "product-item-0"
+- waitForAnimationToEnd
+- tapOn:
+    id: "add-to-cart-button"
+- assertVisible:
+    id: "cart-badge"
+
+# Navigate to checkout
+- tapOn:
+    id: "cart-tab"
+- tapOn:
+    id: "checkout-button"
+
+# Guest email
+- assertVisible:
+    id: "guest-email-input"
+- inputText:
+    id: "guest-email-input"
+    text: "guest@maestro.com"
+- tapOn:
+    id: "guest-email-continue"
+
+# Shipping address
+- inputText:
+    id: "shipping-fullName"
+    text: "Maestro Tester"
+- inputText:
+    id: "shipping-street"
+    text: "100 Flow Street"
+- inputText:
+    id: "shipping-city"
+    text: "Portland"
+- inputText:
+    id: "shipping-state"
+    text: "OR"
+- inputText:
+    id: "shipping-zip"
+    text: "97201"
+- tapOn:
+    id: "shipping-continue"
+
+# Shipping method
+- tapOn:
+    id: "shipping-method-standard"
+- tapOn:
+    id: "shipping-method-continue"
+
+# Payment
+- inputText:
+    id: "payment-card-number"
+    text: "4111111111111111"
+- inputText:
+    id: "payment-card-expiry"
+    text: "12/27"
+- inputText:
+    id: "payment-card-cvv"
+    text: "123"
+- inputText:
+    id: "payment-card-name"
+    text: "Maestro Tester"
+
+# Place order
+- tapOn:
+    id: "place-order-button"
+
+# Confirm
+- assertVisible:
+    id: "order-confirmation-screen"
+- assertVisible:
+    id: "order-number"

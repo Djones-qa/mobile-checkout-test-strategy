@@ -1,0 +1,41 @@
+appId: com.mobilecheckout
+name: Offline Banner Display
+tags:
+  - offline
+  - network
+  - regression
+
+---
+# ─── Offline Banner Test ──────────────────────────────────────────────────────
+
+- launchApp
+
+# Simulate offline mode via airplane mode toggle
+- runScript:
+    file: ../scripts/setAirplaneMode.js
+    env:
+      ENABLED: "true"
+
+- waitForAnimationToEnd
+
+# Offline banner should appear
+- assertVisible:
+    id: "offline-banner"
+
+# Checkout button should be disabled
+- tapOn:
+    id: "cart-tab"
+- assertNotVisible:
+    id: "checkout-button-enabled"
+
+# Restore connectivity
+- runScript:
+    file: ../scripts/setAirplaneMode.js
+    env:
+      ENABLED: "false"
+
+- waitForAnimationToEnd
+
+# Banner should disappear
+- assertNotVisible:
+    id: "offline-banner"

@@ -1,0 +1,35 @@
+node_modules/
+dist/
+.env
+.env.local
+*.log
+
+# iOS build artifacts
+ios/build/
+ios/Pods/
+*.xcworkspace/xcuserdata/
+
+# Android build artifacts
+android/build/
+android/app/build/
+android/.gradle/
+
+# Detox artifacts
+artifacts/
+
+# Percy
+.percy/
+
+# Appium
+appium/reports/
+appium/screenshots/
+
+# Maestro
+.maestro/
+
+# macOS
+.DS_Store
+
+# Test results
+test-results/
+coverage/
