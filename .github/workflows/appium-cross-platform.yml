@@ -38,7 +38,7 @@ jobs:
         run: npx wdio config validate ./appium/wdio.conf.js || true
 
       - name: TypeScript type-check (Appium page objects)
-        run: npx tsc --noEmit
+        run: npx tsc --noEmit -p tsconfig.appium.json
 
       - name: Verify Appium test files exist
         run: |

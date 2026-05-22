@@ -10,13 +10,13 @@
     "resolveJsonModule": true,
     "outDir": "./dist",
     "baseUrl": ".",
-    "types": ["jest", "@wdio/globals/types", "node"],
+    "types": ["jest", "node"],
     "paths": {
       "@detox/*": ["detox/*"],
       "@appium/*": ["appium/*"],
       "@maestro/*": ["maestro/*"]
     }
   },
-  "include": ["detox/**/*", "appium/**/*", "storybook/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["detox/**/*", "storybook/**/*"],
+  "exclude": ["node_modules", "dist", "appium/**/*"]
 }

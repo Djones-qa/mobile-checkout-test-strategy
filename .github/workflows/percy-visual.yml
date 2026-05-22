@@ -23,7 +23,7 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: TypeScript type-check (Storybook stories)
-        run: npx tsc --noEmit
+        run: npx tsc --noEmit && npx tsc --noEmit -p tsconfig.appium.json
 
       - name: Verify Storybook story files exist
         run: |

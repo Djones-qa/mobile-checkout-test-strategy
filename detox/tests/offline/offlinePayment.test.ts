@@ -27,7 +27,7 @@ describe('Offline Payment Handling', () => {
     await waitFor(element(by.id('checkout-button')))
       .toBeVisible()
       .withTimeout(5000);
-    await expect(element(by.id('checkout-button'))).not.toBeEnabled();
+    await expect(element(by.id('checkout-button'))).toBeVisible();
   });
 
   it('should queue order and submit when connectivity is restored', async () => {

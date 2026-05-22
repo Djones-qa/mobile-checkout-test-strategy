@@ -2,7 +2,7 @@ import CheckoutPage from '../pages/CheckoutPage';
 
 describe('Cross-Platform Checkout — Appium', () => {
   beforeEach(async () => {
-    await browser.reset();
+    await browser.reloadSession();
   });
 
   it('should complete guest checkout on both iOS and Android', async () => {

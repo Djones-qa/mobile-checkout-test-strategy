@@ -37,7 +37,7 @@ jobs:
         run: detox config validate
 
       - name: TypeScript type-check
-        run: npx tsc --noEmit
+        run: npx tsc --noEmit && npx tsc --noEmit -p tsconfig.appium.json
 
       - name: Lint test files
         run: npx eslint detox/ --ext .ts --max-warnings 0 || true
