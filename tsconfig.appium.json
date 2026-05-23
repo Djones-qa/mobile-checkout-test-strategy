@@ -9,7 +9,7 @@
     "resolveJsonModule": true,
     "outDir": "./dist",
     "baseUrl": ".",
-    "types": ["@wdio/globals/types", "node"]
+    "types": ["@wdio/globals/types", "@wdio/jasmine-framework", "jasmine", "node"]
   },
   "include": ["appium/**/*"],
   "exclude": ["node_modules", "dist"]

@@ -9,7 +9,7 @@ describe('Biometric Authentication', () => {
   beforeAll(async () => {
     await device.launchApp({
       newInstance: true,
-      permissions: { faceid: 'YES', finger: 'YES' },
+      permissions: { faceid: 'YES' },
     });
   });
 
